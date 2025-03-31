@@ -2,8 +2,11 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const verifyToken = require("../middlewares/auth.middlewares")
+
+//Modelos
 const User = require("../models/User.model")
-// aquí van las rutas de auth
+
+// Aquí van las rutas de auth
 
 // POST "/api/auth/signup" => Ruta para crear el documento del usuario. (nombre completo de la ruta)
 router.post("/signup", async (req, res, next) => { //(prefijo de la ruta)
