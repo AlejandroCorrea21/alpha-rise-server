@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-
 const User = require(`../models/User.model`);
 const verifyToken = require("../middlewares/auth.middlewares")
 
@@ -24,5 +23,13 @@ router.get("/profile", verifyToken, async (req, res, next)=>{
   }
 })
 
-//Que el usuario pueda ver otros perfiles (???)
+//Que el usuario pueda ver otro perfil (Revisar Jorge)
+router.get("/:id", verifyToken, async (req, res, next) => {
+  try {
+    const response = await User.findById(req.params.id)
+    res.status(200).json(response);
+  } catch (error) {
+    next(error)
+}
+})
 module.exports = router;

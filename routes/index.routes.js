@@ -12,9 +12,9 @@ const userRouter = require("./user.routes")
 router.use("/users", userRouter)
 
 //const commentRouter = require("./comment.routes")
-//router.use("/comment", commentRouter)
+//router.use("/comments", commentRouter)
 
-//const resourceRouter = require("./resource.routes")
-//router.use("/resource", resourceRouter)
+const resourceRouter = require("./resource.routes")
+router.use("/resources", resourceRouter)
 
 module.exports = router;
