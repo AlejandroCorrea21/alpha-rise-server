@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require(`../models/User.model`);
 
 //Llamar a todos los usuarios
-router.get("/user", async (req, res, next) => {
+router.get("/users", async (req, res, next) => {
     try {
       const users = await User.find();
       res.status(200).json(users);
@@ -14,7 +14,7 @@ router.get("/user", async (req, res, next) => {
   });
 
 //Ver el perfil de un usuario en específico.
-router.get("/user/:id", async (req, res, next)=>{
+router.get("/users/:id", async (req, res, next)=>{
     try {
         const response = await User.findById(req.params.id)
         res.status(200).json(response);
