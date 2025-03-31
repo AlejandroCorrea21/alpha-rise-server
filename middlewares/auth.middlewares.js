@@ -18,7 +18,6 @@ function verifyToken(req, res, next) {
         next() // continua con la proxima ruta
     } catch (error) {
 
-        // si esta funcion entra en el catch, significa que el token no es valido.
         res.status(401).json({ errorMessage: "token no valido o no existe" })
 
     }
