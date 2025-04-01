@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const verifyToken = require("../middlewares/auth.middlewares")
+const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middlewares")
 
 //Modelos
 const User = require("../models/User.model")
@@ -89,6 +89,7 @@ router.post("/login", async (req, res, next) => {
             _id: foundUser._id,
             email: foundUser.email,
             role: foundUser.role
+
             // si tuvieramos roles, también tendrían que ir aquí.
         } // el payload es la información única del usuario que lo identifica, que estará dentro del token.
 
@@ -121,4 +122,8 @@ router.post("/private-page", verifyToken, (req, res) => {
     res.status(201).json("has creado una página privada")
 })
 
+// Ejemplo de ruta privada solo para usuario logueado y admin.
+router.delete("/delete-resource", verifyToken, verifyAdminRole, (req, res) => {
+    res.status(201).json("borrado resource")
+})
 module.exports = router

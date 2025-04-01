@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require(`../models/User.model`);
-const verifyToken = require("../middlewares/auth.middlewares")
+const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middlewares")
 
 //Llamar a todos los usuarios (Funciona)
 router.get("/", async (req, res, next) => {

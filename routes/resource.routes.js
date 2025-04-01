@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Resource = require(`../models/Resource.model`);
-const verifyToken = require("../middlewares/auth.middlewares")
+const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middlewares")
 
 //Llamar todos los recursos (funciona)
 router.get("/", async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   });
 
 // Añadir recurso (admin)
-  router.post("/", verifyToken, async (req, res, next) => {
+  router.post("/", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
         const createdResources = await Resource.create({
             title: req.body.title,
@@ -40,7 +40,7 @@ router.get("/:id", async (req, res, next) => {
     })
 
 //Editar un recurso (admin)
-router.put("/:id", verifyToken, async (req, res, next) => {
+router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
         const updatedResource = await Resource.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.status(200).json(updatedResource)
@@ -49,7 +49,7 @@ router.put("/:id", verifyToken, async (req, res, next) => {
     }
 });
 //Eliminar un recurso (admin)
-router.delete("/:id", verifyToken, async (req, res, next) => {
+router.delete("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
         await Resource.findByIdAndDelete(req.params.id)
         res.status(200).json({ message: "Recurso eliminado correctamente" })

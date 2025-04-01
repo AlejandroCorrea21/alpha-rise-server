@@ -24,4 +24,12 @@ function verifyToken(req, res, next) {
 
 }
 
-module.exports = verifyToken
+function verifyAdminRole (req, res, next) {
+    // el middleware siempre se pretende ejecutar después del verifyToken
+    if(req.payload.role === "admin") {
+        next() // si eres Admin continua.
+    } else {
+        res.status(401).json({ errorMessage: "ruta solo para admins" })
+    }
+}
+module.exports = { verifyToken, verifyAdminRole }
