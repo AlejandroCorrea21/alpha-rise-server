@@ -17,9 +17,9 @@ const resourceSchema = new Schema(
             type: String,
             required: true,
         },
-        author: {
-            type: String,
-            trim: true,
+        author: { 
+            type: String, 
+            required: true
         },
         favorites: [
             {
@@ -33,7 +33,7 @@ const resourceSchema = new Schema(
         },
         origen: {
             type: String,
-            enum: ["Grecia", "Israel", "Gran Bretaña", "Egipto", "Otro"],
+            enum: ["Grecia", "Francia", "Brazil", "Israel", "Jerusalén", "Roma", "Gran Bretaña", "Egipto", "Otro"],
             required: true,
         },
     },

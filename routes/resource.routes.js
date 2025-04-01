@@ -16,11 +16,12 @@ router.get("/", async (req, res, next) => {
 // Añadir recurso (admin) (funciona)
   router.post("/", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
+        console.log("REQ.BODY:", req.body);
         const createdResources = await Resource.create({
             title: req.body.title,
             category: req.body.category,
             content: req.body.content,
-            author: req.payload._id,
+            author: req.body.author,
             origen: req.body.origen,
         });
         res.status(201).json(createdResources)
@@ -39,7 +40,7 @@ router.get("/:id", async (req, res, next) => {
     }
     })
 
-//Editar un recurso (admin)
+//Editar un recurso (admin) (funciona)
 router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
         const updatedResource = await Resource.findByIdAndUpdate(req.params.id, req.body, { new: true });
