@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const { Schema, model } = require("mongoose");
 
 const resourceSchema = new Schema(
@@ -18,10 +19,14 @@ const resourceSchema = new Schema(
         },
         author: {
             type: String,
-            required: true,
             trim: true,
         },
-        favorites: [],
+        favorites: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+        ],
         views: {
             type: Number,
             default: 0,

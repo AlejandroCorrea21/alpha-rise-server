@@ -11,8 +11,8 @@ router.use("/auth", authRouter)
 const userRouter = require("./user.routes")
 router.use("/users", userRouter)
 
-//const commentRouter = require("./comment.routes")
-//router.use("/comments", commentRouter)
+const commentRouter = require("./comment.routes")
+router.use("/comments", commentRouter)
 
 const resourceRouter = require("./resource.routes")
 router.use("/resources", resourceRouter)
