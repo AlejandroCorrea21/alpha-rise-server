@@ -3,10 +3,8 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middlewares")
 
-//Modelos
 const User = require("../models/User.model")
 
-// Aquí van las rutas de auth
 
 // POST "/api/auth/signup" => Ruta para crear usuario. (Funciona)
 router.post("/signup", async (req, res, next) => {

@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-// ℹ️ Test Route. Can be left and used for waking up the server if idle
 router.get("/", (req, res, next) => {
   res.json("All good in here");
 });
@@ -16,5 +15,9 @@ router.use("/comments", commentRouter)
 
 const resourceRouter = require("./resource.routes")
 router.use("/resources", resourceRouter)
+
+const favoriteRouter = require("./favorite.routes");
+router.use("/favorites", favoriteRouter);
+
 
 module.exports = router;

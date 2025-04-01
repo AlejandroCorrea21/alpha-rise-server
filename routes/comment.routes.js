@@ -4,7 +4,7 @@ const Comment = require("../models/Comment.model");
 const verifyToken = require("../middlewares/auth.middlewares")
 
 //Crear un comentario
-/* router.post("/resourceId/comments", verifyToken, async (req, res, next) => {
+router.post("/:resourceId/comments", async (req, res, next) => {
 
     try {
         const created = await Comment.create({
@@ -17,7 +17,7 @@ const verifyToken = require("../middlewares/auth.middlewares")
     } catch (error) {
         next(error);
     }
-}); */
+});
 
 //Editar un comentario
 
