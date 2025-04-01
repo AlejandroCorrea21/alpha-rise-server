@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
     }
   });
 
-// Añadir recurso (admin)
+// Añadir recurso (admin) (funciona)
   router.post("/", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
         const createdResources = await Resource.create({
