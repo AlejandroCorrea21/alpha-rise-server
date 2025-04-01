@@ -23,13 +23,13 @@ router.get("/profile", verifyToken, async (req, res, next)=>{
   }
 })
 
-//Que el usuario pueda ver otro perfil (Revisar Jorge)
-router.get("/:id", verifyToken, async (req, res, next) => {
+// Editar usuario
+router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
   try {
-    const response = await User.findById(req.params.id)
-    res.status(200).json(response);
+      const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      res.status(200).json(updateUser)
   } catch (error) {
-    next(error)
-}
-})
+      next(error)
+  }
+});
 module.exports = router;
