@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const User = require(`../models/User.model`);
+const Comment = require("../models/Comment.model");
 const verifyToken = require("../middlewares/auth.middlewares")
 
 //Crear un comentario
-router.get
+/* router.post("/resourceId/comments", verifyToken, async (req, res, next) => {
 
+    try {
+        const created = await Comment.create({
+            user: req.payload._id,
+            resource: req.body.resource,
+            text: req.body.text,
+        });
+
+        res.status(201).json(created);
+    } catch (error) {
+        next(error);
+    }
+}); */
 
 //Editar un comentario
 

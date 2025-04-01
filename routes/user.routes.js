@@ -23,7 +23,7 @@ router.get("/profile", verifyToken, async (req, res, next)=>{
   }
 })
 
-// Editar usuario
+// Editar usuario (funciona)
 router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
   try {
       const updateUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
