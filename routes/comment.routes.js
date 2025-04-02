@@ -30,12 +30,26 @@ router.put("/:id", verifyToken, async (req, res, next) => {
     }
 });
 
-// Todos los comentarios
+// Todos los comentarios (funciona)
+router.get("/", async (req, res, next) => {
+    try {
+      const comments = await Comment.find()
+      res.status(200).json(comments)
+    } catch (error) {
+      next(error)
+    }
+  });
 
 
-
-//Eliminar un comentario
-
+//Eliminar un comentario (funciona)
+router.delete("/:id", verifyToken, async (req, res, next) => {
+    try {
+        await Comment.findByIdAndDelete(req.params.id)
+        res.status(200).json({ message: "Comentario eliminado correctamente" })
+    } catch (error) {
+        next(error)
+    }
+});
 
 
 
