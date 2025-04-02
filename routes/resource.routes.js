@@ -30,11 +30,11 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-//Llamar recurso en específico (funciona)
+//Llamar recurso en específico
 router.get("/:id", async (req, res, next) => {
     try {
         const resource = await Resource.findById(req.params.id)
-        res.status(200).json(resource);
+        res.status(404).json({ errorMessage: "Recurso no encontrado" })
     } catch (error) {
         next(error)
     }

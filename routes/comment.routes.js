@@ -3,11 +3,9 @@ const router = express.Router();
 const Comment = require("../models/Comment.model");
 const { verifyToken }= require("../middlewares/auth.middlewares")
 
-//Crear un comentario
+//Crear un comentario (funciona)
 router.post("/", verifyToken, async (req, res, next) => {
 
-        // const createComment = await Comment.find({ resource: req.params.resourceId }).populate("resource");
-        // Route.get() requires a callback function but got a [object Object]
     try {
         
         const created = await Comment.create({
@@ -15,16 +13,22 @@ router.post("/", verifyToken, async (req, res, next) => {
             resource: req.body.resource,
             text: req.body.text,
         });
-
+       
         res.status(201).json(created);
     } catch (error) {
         next(error);
     }
 });
 
-//Editar un comentario
-router.put
-
+//Editar un comentario (funciona)
+router.put("/:id", verifyToken, async (req, res, next) => {
+    try {
+        const updateComment = await Comment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(200).json(updateComment)
+    } catch (error) {
+        next(error)
+    }
+});
 
 // Todos los comentarios
 
