@@ -30,15 +30,20 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-//Llamar recurso en específico
+//Llamar recurso en específico (funciona)
 router.get("/:id", async (req, res, next) => {
     try {
-        const resource = await Resource.findById(req.params.id)
-        res.status(404).json({ errorMessage: "Recurso no encontrado" })
+        const resource = await Resource.findById(req.params.id);
+
+        if (!resource) {
+            return res.status(404).json({ errorMessage: "Recurso no encontrado" });
+        }
+
+        res.status(200).json(resource);
     } catch (error) {
-        next(error)
+        next(error);
     }
-    })
+});
 
 //Editar un recurso (admin) (funciona)
 router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
