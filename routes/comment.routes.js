@@ -51,7 +51,17 @@ router.delete("/:id", verifyToken, async (req, res, next) => {
     }
 });
 
-
-
+//Comentario de un recurso específico
+router.get("/resources/:id", async (req, res, next) => {
+    try {
+      const comments = await Comment.find({ resource: req.params.id }).populate('user', 'username')
+      if(!comments) {
+        return res.status(404).json({ errorMessage: "Aún no hay comentarios" });
+      }
+      res.status(200).json(comments);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 module.exports = router;
