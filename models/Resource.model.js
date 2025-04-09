@@ -36,12 +36,15 @@ const resourceSchema = new Schema(
             enum: ["Grecia", "Francia", "Brazil", "Israel", "Jerusalén", "Roma", "Gran Bretaña", "Egipto", "Otro"],
             required: true,
         },
-    },
-    {
-        timestamps: true,
-    }
-);
-
-const Resource = model("Resource", resourceSchema);
-
-module.exports = Resource;
+        imageUrl: {
+            type: String,
+          },
+        },
+        {
+          timestamps: true,
+        }
+      );
+      
+      const Resource = model("Resource", resourceSchema);
+      
+      module.exports = Resource;

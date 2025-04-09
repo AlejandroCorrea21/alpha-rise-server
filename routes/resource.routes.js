@@ -23,6 +23,7 @@ router.get("/", async (req, res, next) => {
             content: req.body.content,
             author: req.body.author,
             origen: req.body.origen,
+            imageUrl: req.body.imageUrl,
         });
         res.status(201).json(createdResources)
     } catch (error) {
