@@ -10,7 +10,7 @@ const resourceSchema = new Schema(
         },
         category: {
             type: String,
-            enum: ["libro", "frase", "texto bíblico", "artículo", "otro"],
+            enum: ["libro", "frase", "texto bíblico", "otro"],
             required: true,
         },
         content: {

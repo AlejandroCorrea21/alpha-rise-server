@@ -20,6 +20,21 @@ router.post("/", verifyToken, async (req, res, next) => {
     }
 });
 
+//Pedir comentario específico por id (funciona)
+router.get("/:id", async (req, res, next) => {
+  try {
+      const comment = await Comment.findById(req.params.id);
+      
+      if (!comment) {
+          return res.status(404).json({ message: "Comentario no encontrado" });
+      }
+
+      res.status(200).json(comment);
+  } catch (error) {
+      next(error);
+  }
+});
+
 //Editar un comentario (funciona)
 router.put("/:id", verifyToken, async (req, res, next) => {
     try {

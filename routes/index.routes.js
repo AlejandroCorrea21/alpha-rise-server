@@ -19,5 +19,7 @@ router.use("/resources", resourceRouter)
 const favoriteRouter = require("./favorite.routes");
 router.use("/favorites", favoriteRouter);
 
+const uploadRoutes = require("./upload.routes");
+router.use("/upload", uploadRoutes);
 
 module.exports = router;
