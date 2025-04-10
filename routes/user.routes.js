@@ -4,7 +4,8 @@ const User = require(`../models/User.model`);
 const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middlewares")
 
 //Llamar a todos los usuarios (Funciona)
-router.get("/", async (req, res, next) => {
+router.get("/", verifyToken, verifyAdminRole, async (req, res, next) => {
+
     try {
       const users = await User.find()
       res.status(200).json(users)
@@ -21,7 +22,17 @@ router.get("/profile", verifyToken, async (req, res, next)=>{
   } catch (error) {
       next(error)
   }
-})
+});
+
+// Editar perfil usuario
+router.put("/profile", verifyToken, async (req, res, next) => {
+  try {
+    const updateUser = await User.findByIdAndUpdate(req.payload._id, req.body, { new: true });
+    res.status(200).json(updateUser);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Editar usuario (funciona)
 router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
@@ -32,4 +43,5 @@ router.put("/:id", verifyToken, verifyAdminRole, async (req, res, next) => {
       next(error)
   }
 });
+
 module.exports = router;

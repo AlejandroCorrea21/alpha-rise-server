@@ -6,17 +6,23 @@ const { verifyToken, verifyAdminRole } = require("../middlewares/auth.middleware
 //Llamar todos los recursos (funciona)
 router.get("/", async (req, res, next) => {
     try {
-      const resources = await Resource.find()
-      res.status(200).json(resources)
+      const { category } = req.query;
+      let resources;
+      if (category) {
+        resources = await Resource.find({ category });
+      } else {
+        resources = await Resource.find();
+      }
+      res.status(200).json(resources);
     } catch (error) {
-      next(error)
+      next(error);
     }
-  });
+});
+  
 
 // Añadir recurso (admin) (funciona)
   router.post("/", verifyToken, verifyAdminRole, async (req, res, next) => {
     try {
-        console.log("REQ.BODY:", req.body);
         const createdResources = await Resource.create({
             title: req.body.title,
             category: req.body.category,
@@ -38,7 +44,6 @@ router.get("/:id", async (req, res, next) => {
         if (!resource) {
             return res.status(404).json({ errorMessage: "Recurso no encontrado" });
         }
-
         res.status(200).json(resource);
     } catch (error) {
         next(error);
